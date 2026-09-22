@@ -1,0 +1,51 @@
+
+#GRUPOS
+sudo groupadd admins
+sudo groupadd webops
+sudo groupadd auditores
+sudo groupadd visitantes
+
+#UTILIZADORES
+sudo useradd -m -s /bin/bash admin01
+sudo useradd -m -s /bin/bash web01
+sudo useradd -m -s /bin/bash auditor01
+sudo useradd -m -s /bin/bash visitante01
+
+#GRUPOS
+sudo usermod -aG admins admin01
+sudo usermod -aG webops web01
+sudo usermod -aG auditores auditor01
+
+#ESTRUTURA
+sudo mkdir -p /opt/projeto/web/{public,config,logs,docs}
+
+#PROPRETARIOS
+sudo chown -R root:webops /opt/projeto-web/public
+sudo chown -R root:admins /opt/projeto-web/config
+sudo chown -R root:admins /opt/projeto-web/logs
+sudo chown -R root:webops /opt/projeto-web/docs
+
+#PERMISSOES
+sudo chmod -R 775 /opt/projeto-web/public
+sudo chmod -R 750 /opt/projeto-web/config
+sudo chmod -R 750 /opt/projeto-web/logs
+
+#ACL
+sudo setfacl -R -m g:auditores:rX /opt/projeto-web/docs
+sudo setfacl -R -m g:visitantes:rX /opt/projeto-web/docs
+
+#VEREFICACAO
+id admin01
+id web01
+id auditor01
+id visitante01
+
+ls /la /opt/projeto/web
+getfacl /opt/projeto-web/docs
+
+#SSH
+sudo sshd -t
+sudo systemctl restart ssh
+
+
+
