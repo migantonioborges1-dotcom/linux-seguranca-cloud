@@ -1,0 +1,41 @@
+# Atividade Individual - Tópico 04
+# Comandos utilizados
+
+# Verificação do serviço Nginx
+sudo systemctl status nginx --no-pager
+
+# Identificação das portas e serviços
+sudo ss -tulpn
+
+# Verificação específica das portas web e SSH
+sudo ss -tulpn | grep -E ':22|:80|:443|:8080'
+
+# Verificação inicial do UFW
+sudo ufw status verbose
+
+# Permissão SSH
+sudo ufw allow 22/tcp
+
+# Permissão HTTP
+sudo ufw allow 80/tcp
+
+# Verificação das regras
+sudo ufw status numbered
+
+# Ativação do firewall
+sudo ufw enable
+
+# Verificação final
+sudo ufw status verbose
+
+# Teste do Nginx
+sudo nginx -t
+
+# Estado do Nginx
+sudo systemctl is-active nginx
+
+# Teste HTTP local
+curl -I http://localhost
+
+# Teste HTTP pelo endereço IP
+curl -I http://10.90.27.181
