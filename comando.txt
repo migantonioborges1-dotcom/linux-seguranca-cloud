@@ -1,0 +1,48 @@
+hostname
+hostname -I
+lsb_release -a
+uname -a
+
+uptime
+uptime -p
+who -b
+
+free -h
+df -h
+
+sudo systemctl status nginx
+systemctl is-active nginx
+systemctl is-enabled nginx
+
+sudo ss -lntp
+sudo ss -lntp | grep nginx
+
+curl -I http://localhost
+
+sudo journalctl -n 30 --no-pager
+sudo journalctl --since today --no-pager
+
+sudo tail -n 30 /var/log/nginx/access.log
+sudo tail -n 30 /var/log/nginx/error.log
+
+mkdir -p ~/backups/topico-05
+
+tar -czvf ~/backups/topico-05/site-backup.tar.gz \
+~/linux-seguranca-cloud/topico-03/atividade-individual/site
+
+sudo cp /etc/nginx/sites-available/topico-03 \
+~/backups/topico-05/topico-03-nginx.conf
+
+ls -lh ~/backups/topico-05/
+
+tar -tzf ~/backups/topico-05/site-backup.tar.gz
+
+mkdir -p ~/teste-restauracao
+
+tar -xzvf ~/backups/topico-05/site-backup.tar.gz \
+-C ~/teste-restauracao
+
+find ~/teste-restauracao -type f
+
+diff -rq ~/linux-seguranca-cloud/topico-03/atividade-individual/site/ ~/teste-restauracao/
+
